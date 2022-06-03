@@ -3,7 +3,6 @@ package tests;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTests extends TestBase {
@@ -30,10 +29,10 @@ public class PracticeFormTests extends TestBase {
                 .setGender(gender)
                 .setMobileNumber(userNumber)
                 .setDayOfBirth("11", "December", "1994")
-                .setSubject(subject)
+                .setSubject(subject).setSubject("Ma").setSubject("Che")
                 .setHobbies(hobbyMusic, hobbyReading, hobbySports)
                 .uploadPicture(fileName)
-                .setcurrentAddress(currentAddress)
+                .setCurrentAddress(currentAddress)
                 .setStateAndCity(state, city)
                 .submit();
 
