@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponents;
+import pages.components.ResultsTableComponent;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -21,6 +22,7 @@ public class PracticeForm {
     SelenideElement stateElement = $("#state");
     SelenideElement cityElement = $("#city");
     SelenideElement submitElement = $("#submit");
+    ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
 
     public PracticeForm openPage() {
         open("automation-practice-form");
@@ -113,5 +115,11 @@ public class PracticeForm {
 
     public void submit() {
         submitElement.click();
+    }
+
+    public PracticeForm checkResult(String key, String value) {
+        resultsTableComponent.checkResult(key, value);
+
+        return this;
     }
 }

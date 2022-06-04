@@ -2,13 +2,10 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
-
 public class PracticeFormTests extends TestBase {
 
     @Test
-    void mainTest() {
+    void setFields() {
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String userEmail = "ivan.ivanov@gmail.com";
@@ -23,34 +20,39 @@ public class PracticeFormTests extends TestBase {
         String state = "Uttar Pradesh";
         String city = "Agra";
 
+        String fullNameLine = "Student Name";
+        String emailLine = "Student Email";
+        String genderLine = "Gender";
+        String mobileLine = "Mobile";
+        String dateOfBirthLine = "Date of Birth";
+        String subjectsLine = "Subjects";
+        String hobbiesLine = "Hobbies";
+        String pictureLine = "Picture";
+        String addressLine = "Address";
+        String stateAndCityLine = "State and City";
+
         practiceForm.openPage()
                 .setFullName(firstName, lastName)
                 .setEmail(userEmail)
                 .setGender(gender)
                 .setMobileNumber(userNumber)
                 .setDayOfBirth("11", "December", "1994")
-                .setSubject(subject).setSubject("Ma").setSubject("Che")
+                .setSubject(subject)
                 .setHobbies(hobbyMusic, hobbyReading, hobbySports)
                 .uploadPicture(fileName)
                 .setCurrentAddress(currentAddress)
                 .setStateAndCity(state, city)
                 .submit();
 
-
-        $(".modal-body").shouldHave(text(firstName + " " + lastName),
-                text(userEmail),
-                text(gender),
-                text(userNumber),
-                text("11 December,1994"),
-                text(subject),
-                text(hobbyMusic),
-                text(hobbyReading),
-                text(hobbySports),
-                text(fileName),
-                text(currentAddress),
-                text(state + " " + city)
-        );
-
-        $("#closeLargeModal").click();
+        practiceForm.checkResult(fullNameLine, firstName + " " + lastName)
+                .checkResult(emailLine, userEmail)
+                .checkResult(genderLine, gender)
+                .checkResult(mobileLine, userNumber)
+                .checkResult(dateOfBirthLine, "11 December,1994")
+                .checkResult(subjectsLine, subject)
+                .checkResult(hobbiesLine, hobbyMusic + ", " + hobbyReading + ", " + hobbySports)
+                .checkResult(pictureLine, fileName)
+                .checkResult(addressLine, currentAddress)
+                .checkResult(stateAndCityLine, state + " " + city);
     }
 }
