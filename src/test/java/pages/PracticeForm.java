@@ -9,20 +9,20 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class PracticeForm {
-    SelenideElement firstNameInput = $("#firstName"), lastNameInput = $("#lastName"); 
-    SelenideElement emailInput = $("#userEmail");
-    SelenideElement genderElement = $("#genterWrapper");
-    SelenideElement mobileNumberInput = $("#userNumber");
-    SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
-    CalendarComponents calendarComponents = new CalendarComponents();
-    SelenideElement subjectInput = $("#subjectsInput");
-    SelenideElement hobbyElement = $("#hobbiesWrapper");
-    SelenideElement pictureInput = $("#uploadPicture");
-    SelenideElement addressInput = $("#currentAddress");
-    SelenideElement stateElement = $("#state");
-    SelenideElement cityElement = $("#city");
-    SelenideElement submitElement = $("#submit");
-    ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
+    private SelenideElement firstNameInput = $("#firstName"), lastNameInput = $("#lastName");
+    private SelenideElement emailInput = $("#userEmail");
+    private SelenideElement genderElement = $("#genterWrapper");
+    private SelenideElement mobileNumberInput = $("#userNumber");
+    private SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
+    private CalendarComponents calendarComponents = new CalendarComponents();
+    private SelenideElement subjectInput = $("#subjectsInput");
+    private SelenideElement hobbyElement = $("#hobbiesWrapper");
+    private SelenideElement pictureInput = $("#uploadPicture");
+    private SelenideElement addressInput = $("#currentAddress");
+    private SelenideElement stateElement = $("#state");
+    private SelenideElement cityElement = $("#city");
+    private SelenideElement submitElement = $("#submit");
+    private ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
 
     public PracticeForm openPage() {
         open("automation-practice-form");
@@ -113,8 +113,10 @@ public class PracticeForm {
         return this;
     }
 
-    public void submit() {
+    public PracticeForm submit() {
         submitElement.click();
+
+        return this;
     }
 
     public PracticeForm checkResult(String key, String value) {
