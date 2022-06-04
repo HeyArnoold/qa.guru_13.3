@@ -9,20 +9,21 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class PracticeForm {
-    private SelenideElement firstNameInput = $("#firstName"), lastNameInput = $("#lastName");
-    private SelenideElement emailInput = $("#userEmail");
-    private SelenideElement genderElement = $("#genterWrapper");
-    private SelenideElement mobileNumberInput = $("#userNumber");
-    private SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
-    private CalendarComponents calendarComponents = new CalendarComponents();
-    private SelenideElement subjectInput = $("#subjectsInput");
-    private SelenideElement hobbyElement = $("#hobbiesWrapper");
-    private SelenideElement pictureInput = $("#uploadPicture");
-    private SelenideElement addressInput = $("#currentAddress");
-    private SelenideElement stateElement = $("#state");
-    private SelenideElement cityElement = $("#city");
-    private SelenideElement submitElement = $("#submit");
-    private ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement emailInput = $("#userEmail");
+    private final SelenideElement genderElement = $("#genterWrapper");
+    private final SelenideElement mobileNumberInput = $("#userNumber");
+    private final SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
+    private final CalendarComponents calendarComponents = new CalendarComponents();
+    private final SelenideElement subjectInput = $("#subjectsInput");
+    private final SelenideElement hobbyElement = $("#hobbiesWrapper");
+    private final SelenideElement pictureInput = $("#uploadPicture");
+    private final SelenideElement addressInput = $("#currentAddress");
+    private final SelenideElement stateElement = $("#state");
+    private final SelenideElement cityElement = $("#city");
+    private final SelenideElement submitElement = $("#submit");
+    private final ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
 
     public PracticeForm openPage() {
         open("automation-practice-form");
