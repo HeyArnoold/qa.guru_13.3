@@ -1,9 +1,8 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class RandomUtils {
     private final String ncr = "NCR", uttar = "Uttar Pradesh", haryana = "Haryana", rajasthan = "Rajasthan";
@@ -20,20 +19,38 @@ public class RandomUtils {
         }
     }
 
+    public String[] setRandomDateBetween(int firstYear, int lastYear) {
+        Calendar randomDate = new GregorianCalendar();
+
+        int year = getRandomInt(firstYear, lastYear);
+
+        randomDate.set(randomDate.YEAR, year);
+
+        int dayOfYear = getRandomInt(1, randomDate.getActualMaximum(randomDate.DAY_OF_YEAR));
+
+        randomDate.set(randomDate.DAY_OF_YEAR, dayOfYear);
+
+        LocalDate localDate = LocalDate.of(randomDate.get(randomDate.YEAR),
+                (randomDate.get(randomDate.MONTH) + 1), randomDate.get(randomDate.DAY_OF_MONTH));
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
+        String fullDate = dateTimeFormatter.format(localDate);
+        String[] arrayOfDate = fullDate.split(" ");
+
+        return arrayOfDate;
+    }
+
     public String[] setRandomSubjects() {
         String[] allSubjects = {"Computer Science", "English", "Chemistry", "Commerce", "Economics", "Social Studies",
                 "Arts", "Maths", "History", "Accounting", "Physics", "Biology", "Hindi", "Civics"};
 
-        List<String> subjects = new ArrayList<>(List.of(allSubjects));
-        Collections.shuffle(subjects);
-        int randomLength = getRandomInt(1, subjects.size());
+        return getShuffledStringArrayWithRandomLength(allSubjects);
+    }
 
-        String[] randomSubjects = new String[randomLength];
-        for (int i = 0; i < randomSubjects.length; i++) {
-            randomSubjects[i] = subjects.get(i);
-        }
+    public String[] setRandomHobbies() {
+        String[] allHobbies = {"Music", "Reading", "Sports"};
 
-        return randomSubjects;
+        return getShuffledStringArrayWithRandomLength(allHobbies);
     }
 
     public String setRandomState() {
@@ -85,5 +102,19 @@ public class RandomUtils {
         Random r = new Random();
 
         return r.nextInt((max - min) + 1) + min;
+    }
+
+    private String[] getShuffledStringArrayWithRandomLength(String[] array) {
+
+        List<String> subjects = new ArrayList<>(List.of(array));
+        Collections.shuffle(subjects);
+        int randomLength = getRandomInt(1, subjects.size());
+
+        String[] randomArray = new String[randomLength];
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = subjects.get(i);
+        }
+
+        return randomArray;
     }
 }

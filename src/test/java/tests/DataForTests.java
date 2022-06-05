@@ -3,6 +3,8 @@ package tests;
 import com.github.javafaker.Faker;
 import utils.*;
 
+import java.util.Calendar;
+
 public class DataForTests {
     private static Faker faker = new Faker();
     private static RandomUtils randomUtils = new RandomUtils();
@@ -12,10 +14,9 @@ public class DataForTests {
     public static final String USER_EMAIL = faker.internet().emailAddress();
     public static final String GENDER = randomUtils.setRandomGender();
     public static final String USER_NUMBER = faker.phoneNumber().subscriberNumber(10);
+    public static final String[] DATE = randomUtils.setRandomDateBetween(1980, 2010);
     public static final String[] SUBJECTS = randomUtils.setRandomSubjects();
-    public static final String HOBBY_MUSIC = "Music";
-    public static final String HOBBY_READING = "Reading";
-    public static final String HOBBY_SPORTS = "Sports";
+    public static final String[] HOBBIES = randomUtils.setRandomHobbies();
     public static final String FILE_NAME = "testPicture.png";
     public static final String CURRENT_ADDRESS = faker.address().streetAddress();
     public static final String STATE = randomUtils.setRandomState();

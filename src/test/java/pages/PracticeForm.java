@@ -7,6 +7,7 @@ import pages.components.ResultsTableComponent;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static tests.DataForTests.DATE;
 
 public class PracticeForm {
     private final SelenideElement firstNameInput = $("#firstName");
@@ -58,9 +59,10 @@ public class PracticeForm {
         return this;
     }
 
-    public PracticeForm setDayOfBirth(String day, String month, String year) {
+    public PracticeForm setDayOfBirth(String... date) {
+
         dateOfBirthInput.click();
-        calendarComponents.setDate(day, month, year);
+        calendarComponents.setDate(date[0], date[1], date[2]);
 
         return this;
     }
@@ -74,23 +76,10 @@ public class PracticeForm {
         return this;
     }
 
-    public PracticeForm setHobbies(String hobbyMusic, String hobbyReading, String hobbySports) {
-        hobbyElement.$(byText(hobbyMusic)).click();
-        hobbyElement.$(byText(hobbyReading)).click();
-        hobbyElement.$(byText(hobbySports)).click();
-
-        return this;
-    }
-
-    public PracticeForm setHobbies(String hobby1, String hobby2) {
-        hobbyElement.$(byText(hobby1)).click();
-        hobbyElement.$(byText(hobby2)).click();
-
-        return this;
-    }
-
-    public PracticeForm setHobbies(String hobby) {
-        hobbyElement.$(byText(hobby)).click();
+    public PracticeForm setHobbies(String... hobbies) {
+        for (String hobby : hobbies) {
+            hobbyElement.$(byText(hobby)).click();
+        }
 
         return this;
     }
@@ -138,6 +127,13 @@ public class PracticeForm {
         valuesAsString.delete(valuesAsString.length() - 2, valuesAsString.length());
 
         resultsTableComponent.checkResult(key, String.valueOf(valuesAsString));
+
+        return this;
+    }
+
+    public PracticeForm checkDate(String key, String... date) {
+        String dateAsString = date[0] + " " + date[1] + "," + date[2];
+        resultsTableComponent.checkResult(key, dateAsString);
 
         return this;
     }
