@@ -1,30 +1,17 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-
-public class PracticeFormTests {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com/";
-        Configuration.browserSize = "2560x1440";
-
-    }
+public class PracticeFormTests extends TestBase {
 
     @Test
-    void mainTest() {
+    void setFields() {
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String userEmail = "ivan.ivanov@gmail.com";
         String gender = "Male";
         String userNumber = "0123456789";
-        String subjects = "Computer Science";
+        String subject = "Computer Science";
         String hobbyMusic = "Music";
         String hobbyReading = "Reading";
         String hobbySports = "Sports";
@@ -33,56 +20,39 @@ public class PracticeFormTests {
         String state = "Uttar Pradesh";
         String city = "Agra";
 
-        open("automation-practice-form");
-        executeJavaScript("$('#RightSide_Advertisement').remove()");
-        executeJavaScript("$('footer').remove()");
+        String fullNameLine = "Student Name";
+        String emailLine = "Student Email";
+        String genderLine = "Gender";
+        String mobileLine = "Mobile";
+        String dateOfBirthLine = "Date of Birth";
+        String subjectsLine = "Subjects";
+        String hobbiesLine = "Hobbies";
+        String pictureLine = "Picture";
+        String addressLine = "Address";
+        String stateAndCityLine = "State and City";
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(userEmail);
+        practiceForm.openPage()
+                .setFullName(firstName, lastName)
+                .setEmail(userEmail)
+                .setGender(gender)
+                .setMobileNumber(userNumber)
+                .setDayOfBirth("11", "December", "1994")
+                .setSubject(subject)
+                .setHobbies(hobbyMusic, hobbyReading, hobbySports)
+                .uploadPicture(fileName)
+                .setCurrentAddress(currentAddress)
+                .setStateAndCity(state, city)
+                .submit();
 
-        $("#genterWrapper").$(byText(gender)).click();
-
-        $("#userNumber").setValue(userNumber);
-
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("December");
-        $(".react-datepicker__year-select").selectOption("1994");
-        $(byText("11")).click();
-
-        $("#subjectsInput").sendKeys(subjects);
-        $("#subjectsInput").pressEnter();
-
-        $("#hobbiesWrapper").$(byText(hobbyMusic)).click();
-        $("#hobbiesWrapper").$(byText(hobbyReading)).click();
-        $("#hobbiesWrapper").$(byText(hobbySports)).click();
-
-        $("#uploadPicture").uploadFromClasspath(fileName);
-
-        $("#currentAddress").setValue(currentAddress);
-
-        $("#state").click();
-        $(byText(state)).click();
-        $("#city").click();
-        $(byText(city)).click();
-
-        $("#submit").click();
-
-
-        $(".modal-body").shouldHave(text(firstName + " " + lastName),
-                text(userEmail),
-                text(gender),
-                text(userNumber),
-                text("11 December,1994"),
-                text(subjects),
-                text(hobbyMusic),
-                text(hobbyReading),
-                text(hobbySports),
-                text(fileName),
-                text(currentAddress),
-                text(state + " " + city)
-        );
-
-        $("#closeLargeModal").click();
+        practiceForm.checkResult(fullNameLine, firstName + " " + lastName)
+                .checkResult(emailLine, userEmail)
+                .checkResult(genderLine, gender)
+                .checkResult(mobileLine, userNumber)
+                .checkResult(dateOfBirthLine, "11 December,1994")
+                .checkResult(subjectsLine, subject)
+                .checkResult(hobbiesLine, hobbyMusic + ", " + hobbyReading + ", " + hobbySports)
+                .checkResult(pictureLine, fileName)
+                .checkResult(addressLine, currentAddress)
+                .checkResult(stateAndCityLine, state + " " + city);
     }
 }
