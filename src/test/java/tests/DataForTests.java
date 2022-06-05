@@ -12,7 +12,7 @@ public class DataForTests {
     public static final String USER_EMAIL = faker.internet().emailAddress();
     public static final String GENDER = randomUtils.setRandomGender();
     public static final String USER_NUMBER = faker.phoneNumber().subscriberNumber(10);
-    public static final String SUBJECT = "Computer Science";
+    public static final String[] SUBJECTS = randomUtils.setRandomSubjects();
     public static final String HOBBY_MUSIC = "Music";
     public static final String HOBBY_READING = "Reading";
     public static final String HOBBY_SPORTS = "Sports";

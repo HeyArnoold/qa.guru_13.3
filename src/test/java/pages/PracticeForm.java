@@ -65,9 +65,11 @@ public class PracticeForm {
         return this;
     }
 
-    public PracticeForm setSubject(String subject) {
-        subjectInput.sendKeys(subject);
-        subjectInput.pressEnter();
+    public PracticeForm setSubject(String... subjects) {
+        for (String subject : subjects) {
+            subjectInput.sendKeys(subject);
+            subjectInput.pressEnter();
+        }
 
         return this;
     }
@@ -122,6 +124,20 @@ public class PracticeForm {
 
     public PracticeForm checkResult(String key, String value) {
         resultsTableComponent.checkResult(key, value);
+
+        return this;
+    }
+
+    public PracticeForm checkResult(String key, String... values) {
+        StringBuilder valuesAsString = new StringBuilder();
+
+        for (String value : values) {
+            valuesAsString.append(value);
+            valuesAsString.append(", ");
+        }
+        valuesAsString.delete(valuesAsString.length() - 2, valuesAsString.length());
+
+        resultsTableComponent.checkResult(key, String.valueOf(valuesAsString));
 
         return this;
     }
