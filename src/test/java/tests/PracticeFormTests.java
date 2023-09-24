@@ -8,8 +8,6 @@ public class PracticeFormTests extends TestBase {
 
     @Test
     void setFields() {
-
-
         practiceForm.openPage()
                 .setFullName(FIRST_NAME, LAST_NAME)
                 .setEmail(USER_EMAIL)

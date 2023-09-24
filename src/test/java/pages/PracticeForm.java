@@ -6,8 +6,6 @@ import pages.components.ResultsTableComponent;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$;
-import static tests.DataForTests.DATE;
 
 public class PracticeForm {
     private final SelenideElement firstNameInput = $("#firstName");
